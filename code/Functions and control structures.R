@@ -14,6 +14,8 @@ cpgiFilePath=system.file("extdata",
                          "subset.cpgi.hg18.bed",
                          package="compGenomRData")
 
+## If, else if, else statements
+
 cpgi.df <- read.table(cpgiFilePath, header = FALSE) 
 head(cpgi.df)
 
