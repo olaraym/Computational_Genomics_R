@@ -83,3 +83,13 @@ vec2=6:10
 mapply(sum,vec1,vec2) #sums the elements of vec1 and vec2 in parallel
 mapply(rep,1:4,4:1) #repeats the elements of 1:4 for 4:1 times respectively
 #rep(1,4) rep(2,3) rep(3,2) rep(4,1)
+
+
+#### Functopns and contro;l structures Assessment.
+cpgtFilePath=system.file("extdata",
+                         "CpGi.table.hg18.txt",
+                         package="compGenomRData")
+cpgi=read.table(cpgtFilePath,header=TRUE,sep="\t")
+head(cpgi)
+## Check values in the perGc column using a histogram. The ‘perGc’ column in the data stands for GC percent => percentage of C+G nucleotides.
+hist(cpgi$perGc)
