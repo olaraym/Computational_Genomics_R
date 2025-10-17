@@ -36,3 +36,50 @@ largeCpGi(cpgi.df[10,])
 largeCpGi(cpgi.df[100,])
 largeCpGi(cpgi.df[1000,])
 
+
+### Loops and looping structures in R
+for(i in 1:5){
+  cat("This is iteration number:",i,"\n")
+}
+
+## You can use an already created function in a loop
+for(i in 1:nrow(cpgi.df)){
+  largeCpGi(cpgi.df[i,])
+}
+
+result=c()
+
+for(i in 1:100){
+  len=cpgi.df[3]-cpgi.df[2]+1
+  result=c(result,len)
+}
+
+head(result)
+
+
+#Apply family of functions
+#lapply, sapply, apply, tapply, mapply
+#apply - works on matrices and data frames and applies the function on each row or column of the data structure
+mat=matrix(1:20,nrow=5)
+mat
+apply(mat,1,sum) #row-wise sum
+apply(mat,2,sum) #column-wise sum
+
+#lapply - works on a list or vector and returns a list
+lst=list(a=1:10,b=11:20,c=21:30)
+lapply(lst,mean)
+
+#sapply - works on a list or vector and returns a vector or matrix if possible
+sapply(lst,mean) #returns a vector or matrix if possible
+
+#tapply - works on a vector and applies a function over subsets of the vector. It can handle multiple vectors as arguments
+vec=c(1,2,3,4,5,6,7,8,9,10)
+fac=gl(2,5,labels=c("A","B"))
+tapply(vec,fac,mean)
+
+##mapply - works on multiple vectors or lists and applies a function in parallel over the elements of the vectors or lists
+vec1=1:5
+vec2=6:10
+mapply(sum,vec1,vec2) #sums the elements of vec1 and vec2 in parallel
+mapply(rep,1:4,4:1) #repeats the elements of 1:4 for 4:1 times respectively
+#rep(1,4) rep(2,3) rep(3,2) rep(4,1)
