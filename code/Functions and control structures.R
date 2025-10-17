@@ -56,7 +56,6 @@ for(i in 1:100){
 
 head(result)
 
-
 #Apply family of functions
 #lapply, sapply, apply, tapply, mapply
 #apply - works on matrices and data frames and applies the function on each row or column of the data structure
@@ -82,7 +81,6 @@ vec1=1:5
 vec2=6:10
 mapply(sum,vec1,vec2) #sums the elements of vec1 and vec2 in parallel
 mapply(rep,1:4,4:1) #repeats the elements of 1:4 for 4:1 times respectively
-#rep(1,4) rep(2,3) rep(3,2) rep(4,1)
 
 
 #### Functopns and contro;l structures Assessment.
@@ -93,3 +91,55 @@ cpgi=read.table(cpgtFilePath,header=TRUE,sep="\t")
 head(cpgi)
 ## Check values in the perGc column using a histogram. The ‘perGc’ column in the data stands for GC percent => percentage of C+G nucleotides.
 hist(cpgi$perGc)
+## Make a boxplot for the ‘perGc’ column.
+boxplot(cpgi$perGc,main="Boxplot of perGc column",ylab="perGc")
+## Use if/else structure to decide if the given GC percent is high, low or medium. If it is low, high, or medium: low < 60, high>75, medium is between 60 and 75; use greater or less than operators, < or >.
+GCper=65
+
+if(GCper < 60){
+  result = "low"
+  cat("The given GC percent is:",result,"\n")
+} else if(GCper > 75){
+  result = "high"
+  cat("The given GC percent is:",result,"\n")
+} else{
+  result = "medium"
+  cat("The given GC percent is:",result,"\n")
+}
+
+## Write a function that takes a value of GC percent and decides if it is low, high, or medium: low < 60, high>75, medium is between 60 and 75.
+GCclass <- function(gc){
+  if(gc < 60){
+    result = "low"
+    cat("The given GC percent is:",result,"\n")
+  } else if(gc > 75){
+    result = "high"
+    cat("The given GC percent is:",result,"\n")
+  } else{
+    result = "medium"
+    cat("The given GC percent is:",result,"\n")
+  }
+  
+  return(result)
+}
+GCclass(80)
+GCclass(10)
+GCclass(70)
+
+## Use a for loop to get GC percentage classes for gcValues below. Use the function you wrote above
+gcValues=c(10,50,70,65,90)
+for( i in gcValues){
+  GCclass(i)
+}
+
+## Use lapply to get GC percentage classes for gcValues.
+lapply(gcValues,GCclass)
+
+## Use sapply to get GC percentage classes for gcValues.
+sapply(gcValues,GCclass)
+
+## Is there a way to decide on the GC percentage class of a given vector of GCpercentages without using if/else structure and loops ? if so, how can you do it? HINT: Subsetting using < and > operators.
+gcValues=c(10,50,70,65,90)
+gcValues[gcValues < 60]  # low
+gcValues[gcValues > 75]  # high
+gcValues[gcValues >= 60 & gcValues <= 75]  # medium
